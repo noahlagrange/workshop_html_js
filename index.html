@@ -80,7 +80,9 @@
         function draw_player(x, y)
         {
         ctx.fillStyle = "blue"
-        ctx.fillRect(x, y, 4, 4)
+        ctx.fillRect(x, y, 5, 5)
+        ctx.fillStyle = "yellow"
+        draw_line(x+2, y+2, (Math.sin(player.angle) * 180/Math.PI), (Math.cos(player.angle) * 180/Math.PI), "yellow")
         }
 
         function gameloop(canvas, ctx) {
