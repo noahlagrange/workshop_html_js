@@ -10,6 +10,10 @@
     var width = 380;
     var heith = 280; 
     
+    let player = {
+    pos_x: 5,
+    pos_y: 5,
+};
     
     function create_arr() {
         let arr = []
@@ -23,7 +27,18 @@
         }
         return arr;
     }
+
     map = create_arr()
+
+    document.addEventListener("keydown", function (e) {
+            if(e.key ==  "ArrowUp") {
+                console.log("<lsjhbf")
+                player.pos_y -= 1
+            }
+            else if(e.key == "ArrowDown") {
+                player.pos_y += 1    
+            }
+        })
 
     document.addEventListener("DOMContentLoaded", (e) =>{
         function draw_line(start_x, start_y, end_x, end_y, color) {
@@ -34,7 +49,6 @@
             ctx.closePath();
             ctx.stroke();
         }
-
         function draw_map(arrmap)
         {
             ctx.lineWidth = 8;
@@ -49,10 +63,19 @@
             }
         }
 
+        function draw_player(x, y)
+        {
+        ctx.fillStyle = "blue"
+        ctx.fillRect(x, y, 4, 4)
+        }
+
         function gameloop(canvas, ctx) {
             ctx.clearRect(0, 0, width, heith)
             draw_map(map)
+            draw_player(player.pos_x, player.pos_y)
         }
+     
+        
 
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
