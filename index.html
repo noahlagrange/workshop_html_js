@@ -13,6 +13,7 @@
     let player = {
     pos_x: 5,
     pos_y: 5,
+    angle: 0,
 };
     
     function create_arr() {
@@ -32,13 +33,26 @@
 
     document.addEventListener("keydown", function (e) {
             if(e.key ==  "ArrowUp") {
-                console.log("<lsjhbf")
-                player.pos_y -= 1
+                player.pos_x +=  (Math.sin(player.angle) * 180/Math.PI) * 0.02
+                player.pos_y +=  (Math.cos(player.angle) * 180/Math.PI) *  0.02
             }
             else if(e.key == "ArrowDown") {
                 player.pos_y += 1    
             }
         })
+
+    document.addEventListener("keydown", function (e) {
+        if(e.key ==  "ArrowRight") {
+            player.angle -= 1
+        }
+        else if(e.key == "ArrowLeft") {
+            player.angle += 1    
+        }
+        if (player.angle > 360)
+            player.angle = 0
+        if (player.angle < 0)
+            player.angle = 360
+    })
 
     document.addEventListener("DOMContentLoaded", (e) =>{
         function draw_line(start_x, start_y, end_x, end_y, color) {
