@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<canvas id="canvas">
+    
+</canvas>
+</html>
+
+<script>
+    
+    var width = 380;
+    var heith = 280; 
+    
+    
+    function create_arr() {
+        let arr = []
+        let line = []
+        for (i = 0; i < 32; i++) {
+            for (y = 0; y < 28; y++) {
+                line.push(Math.round(Math.random(2)))
+            }
+            arr.push(line)
+            line = []
+        }
+        return arr;
+    }
+    map = create_arr()
+
+    document.addEventListener("DOMContentLoaded", (e) =>{
+        function draw_line(start_x, start_y, end_x, end_y, color) {
+            ctx.beginPath();
+            ctx.lineTo(start_x, start_y);
+            ctx.lineTo(end_x, end_y);
+            ctx.strokeStyle = color
+            ctx.closePath();
+            ctx.stroke();
+        }
+
+        function draw_map(arrmap)
+        {
+            ctx.lineWidth = 8;
+            for (i = 0; i < 32; i++) {
+                for (y = 0; y < 28; y++) {
+                    if (arrmap[i][y] === 0)
+                        ctx.fillStyle = "red";
+                    else
+                        ctx.fillStyle = "black";
+                    ctx.fillRect(i * 8, y * 8, 8, 8);
+                }
+            }
+        }
+
+        function gameloop(canvas, ctx) {
+            ctx.clearRect(0, 0, width, heith)
+            draw_map(map)
+        }
+
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        gameloop(canvas, ctx);
+        setInterval(gameloop, 1000/30, canvas, ctx);
+    })
+
+    console.log(create_arr())
+    
+</script>
